@@ -1,0 +1,64 @@
+<!-- 
+This HTML creates pokemon icons in random positions inside of a screen
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokemon</title>
+</head>
+<body>
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  <script>
+
+    $('body').prepend('<div id="container"></div>')
+
+    var numP;
+
+    numP = parseInt(prompt("How many Pokemons do you want?"));
+    //this takes the string from the prompt and make it an integer. This is necessary because I will get a string variable through the prompt.
+
+    while (numP > 152 || numP < 1) {
+      numP = parseInt(prompt("Sorry, please enter a number between 1 and 152. How many Pokemons do you want?"));
+    } 
+    
+    for (i=1; i<numP+1; i++) {
+      var getRandom_height = Math.floor(Math.random()*(window.innerHeight-100));
+      //get random height of the screen. the '-100' is an offset variable. The lower that value, the closer the scatter.
+      var getRandom_width = Math.floor(Math.random()*(window.innerWidth-100));
+      //get random width of the screen
+      $('#container').append('<img class="' + 'pokemon' + getPokemonNumber(i) + '" src="" alt="">');
+      $('.pokemon' + getPokemonNumber(i)).attr('src','http://www.serebii.net/battletrozei/pokemon/' + getPokemonNumber(i) + '.png').css('position','fixed').css('top',getRandom_height).css('left',getRandom_width);
+
+    }
+
+    /*
+      This function turns a passed number into a 3 digit number. For example, 1 will turn into 001. 
+    */
+    function getPokemonNumber(number) {
+
+      //convert number into a string by number.toString()
+      var strNum = number.toString();
+
+      //if number is greater than 99,
+      if (number > 99) {
+        return strNum;
+      } else if (number > 9) {
+        return "0"+strNum;
+      } else {
+        return "00" + strNum;
+      }
+    return;
+    
+    }
+
+
+  </script>
+</body>
+</html>
